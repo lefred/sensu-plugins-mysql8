@@ -15,7 +15,7 @@ then
 	if [[ $(echo "$MY_STATUS" | grep 'lag:') ]]
 	then
 		lag=$(echo "$MY_STATUS" | grep 'lag: ' | cut -d':' -f2 | awk '{ print $1 }')
-        if [[ $lag -e 3020399 ]]
+        if [[ $lag -eq 3020399 ]]
         then
             echo "OK: replication lag reached max, let's wait next check"
             exit 0
