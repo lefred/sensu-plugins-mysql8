@@ -7,7 +7,7 @@ LAG_WARNING=${4:-5}
 LAG_ERROR=${5:-10}
 
 
-MY_STATUS=$(/usr/bin/mysqlsh $USER:$PASSWORD@$HOST --sql -E -e "select * from sys.replication_status_min" 2>/dev//null)
+MY_STATUS=$(/usr/bin/mysqlsh $USER:$PASSWORD@$HOST --sql -E -e "select channel_name, IO_thread, SQL_thread, concat(sum(`lag_in_sec`)," sec") 'tot_lag' from sys.replication_status_min group by channel_name, IO_thread, SQL_thread" 2>/dev//null)
 
 if [[ $(echo "$MY_STATUS" | grep '_thread: ON' | wc -l) == 2 ]]
 then
