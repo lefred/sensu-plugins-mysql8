@@ -19,7 +19,7 @@ SELECT
                            LAST_QUEUED_TRANSACTION_START_QUEUE_TIMESTAMP 'time RL',
   LAST_APPLIED_TRANSACTION_END_APPLY_TIMESTAMP - 
                            LAST_APPLIED_TRANSACTION_START_APPLY_TIMESTAMP 'apply time',  
-  if(GTID_SUBTRACT(LAST_QUEUED_TRANSACTION, LAST_APPLIED_TRANSACTION) = "","0 sec" ,        abs(time_to_sec(if(time_to_sec(APPLYING_TRANSACTION_ORIGINAL_COMMIT_TIMESTAMP)=0,0,timediff(APPLYING_TRANSACTION_ORIGINAL_COMMIT_TIMESTAMP,now()))))) `lag_in_sec` 
+  if(GTID_SUBTRACT(LAST_QUEUED_TRANSACTION, LAST_APPLIED_TRANSACTION) = "","0" ,        abs(time_to_sec(if(time_to_sec(APPLYING_TRANSACTION_ORIGINAL_COMMIT_TIMESTAMP)=0,0,timediff(APPLYING_TRANSACTION_ORIGINAL_COMMIT_TIMESTAMP,now()))))) `lag_in_sec` 
 FROM
   performance_schema.replication_connection_status AS conn_status
 JOIN performance_schema.replication_applier_status_by_worker AS applier_status
