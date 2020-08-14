@@ -11,9 +11,6 @@ SELECT
   applier_status.service_state as SQL_thread,
   conn_status.LAST_QUEUED_TRANSACTION as last_queued_transaction,
   applier_status.LAST_APPLIED_TRANSACTION as last_applied_transaction,
-  if(LAST_APPLIED_TRANSACTION_ORIGINAL_COMMIT_TIMESTAMP = 0, 0,
-  LAST_APPLIED_TRANSACTION_END_APPLY_TIMESTAMP -
-                            LAST_APPLIED_TRANSACTION_ORIGINAL_COMMIT_TIMESTAMP) 'rep delay (sec)',
   LAST_QUEUED_TRANSACTION_START_QUEUE_TIMESTAMP -
                            LAST_QUEUED_TRANSACTION_ORIGINAL_COMMIT_TIMESTAMP 'transport time',
   LAST_QUEUED_TRANSACTION_END_QUEUE_TIMESTAMP -
